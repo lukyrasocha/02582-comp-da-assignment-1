@@ -1,61 +1,107 @@
 from src.preprocess import preprocess
 from src.util import load_data
 
-# Linear Regression Models
 from sklearn.linear_model import LinearRegression, Lasso, Ridge
+from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor
 from sklearn.model_selection import KFold
-
+from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_squared_error
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
 def main():
+    # Load and preprocessor
     data = load_data()
+    X, y, preprocessor = preprocess(data)
+
+    models = {}
+    models['LinearRegression'] = [{'parameters':{}, 'model': LinearRegression(), 'scores': []}]
+    models['Ridge'] = []
+    models['Lasso'] = []
+    models['ElasticNet'] = []
+    models['DecisionTree'] = []
+    models['RandomForest'] = []
+    models['AdaBoost'] = []
+    models['LDA'] = []
+    models['QDA'] = []
+    models['KNN'] = []
+
+    # Ridge
+    lambda_values = np.logspace(-3, 3, 13)
+    for lambda_value in lambda_values:
+        models['Ridge'].append({'parameters': {'regressor_alpha': lambda_value},
+                                'model': Ridge(alpha=lambda_value),
+                                'scores': []})
+    # Lasso
+    lambda_values = np.logspace(-1, 3, 5)
+    for lambda_value in lambda_values:
+        models['Lasso'].append({'parameters': {'regressor_alpha': lambda_value},
+                                'model': Lasso(alpha=lambda_value),
+                                'scores': []})
+
+    # Random Forest
+    n_estimators = [10, 50, 100, 200]
+    max_depth = [5, 10, 20, 50, 200]
+
+    for n in n_estimators:
+        for d in max_depth:
+            models['RandomForest'].append({'parameters': {'n_estimators': n, 'max_depth': d},
+                                           'model': RandomForestRegressor(n_estimators=n, max_depth=d),
+                                           'scores': []})
 
     K = 10
-    kfold = KFold(n_splits=K, shuffle=True)
+    kfold = KFold(n_splits=K, shuffle=True, random_state=42)
 
-    # Linear Regression
-    models = {
-        "LinearRegression": LinearRegression(),
-        "Lasso": Lasso(alpha=1.0),
-        "Ridge": Ridge(alpha=1.0)
-    }
+    # Cross Validation for each model
+    for method in models:
+        print("="*80)
+        print(f'Running cross-validation for {method}')
+        for model in models[method]:
+            pipeline = Pipeline(steps=[('preprocessor', preprocessor),
+                                       ('regressor', model["model"])])
+            for train_index, test_index in kfold.split(X):
+                # Split data into training and validation sets for this fold
+                X_train, X_test = X.iloc[train_index], X.iloc[test_index]
+                y_train, y_test = y.iloc[train_index], y.iloc[test_index]
 
-    # Dictionary to store the scores
-    scores = {model_name: [] for model_name in models.keys()}
+                # Fit the model pipeline on the training data
+                pipeline.fit(X_train, y_train)
 
-    for model_name, model in models.items():
-        for train_index, test_index in kfold.split(data):
-            # Split data (pre-preprocessing) into training and testing based on current fold
-            train_data, test_data = data.iloc[train_index], data.iloc[test_index]
+                # Predict on the validation set
+                y_pred = pipeline.predict(X_test)
 
-            # Apply preprocessing to the current fold's training and test data to avoid leakage
-            X_train, y_train = preprocess(train_data)
-            template_columns = list(X_train.columns)
-            X_test, y_test = preprocess(test_data, template_columns=template_columns)
+                # Calculate RMSE for this fold and append to scores
+                score = np.sqrt(mean_squared_error(y_test, y_pred))
+                model["scores"].append(score)
 
-            X_train = X_train.to_numpy()
-            X_test = X_test.to_numpy()
-            y_train = y_train.to_numpy()
-            y_test = y_test.to_numpy()
+            # Print the average RMSE across all folds
+            print(f'Average RMSE for {method} with parameters: {model["parameters"]}: {np.mean(model["scores"])}')
 
-            # Fit model to training data
-            model.fit(X_train, y_train)
+    # Select the best model for each method
+    best_models = {}
+    for method in models:
+        if not models[method]:
+            continue
+        best_model = min(models[method], key=lambda x: np.mean(x["scores"]))
+        best_models[method] = best_model
+        print(f'Best model for {method}: {best_model["model"]} with parameters: {best_model["parameters"]}')
 
-            # Make predictions on test data
-            predictions = model.predict(X_test)
 
-            # Calculate RMSE and append to scores
-            rmse = np.sqrt(mean_squared_error(y_test, predictions))
-            scores[model_name].append(rmse)
+    for method in best_models:
+        print(method)
+        print("Parameters:", best_models[method]["parameters"])
+        print(f"RMSE: {np.mean(best_models[method]['scores'])}")
 
-        # Calculate and print average RMSE over all folds
-        avg_rmse = np.mean(scores[model_name])
-        print(f"{model_name}: Average RMSE across {K} folds: {avg_rmse}")
+    # Barchart of RMSE for the best model of each method
+    fig, ax = plt.subplots()
+    ax.bar(best_models.keys(),
+           [np.mean(best_models[method]["scores"]) for method in best_models])
+    ax.set_ylabel('RMSE')
+    ax.set_title('RMSE for the best model of each method')
+    plt.show()
 
-    if __name__ == '__main__':
-        main()
 
 if __name__ == '__main__':
     main()
