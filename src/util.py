@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 def load_data():
-    data = pd.read_csv('case1Data.txt')
+    data = pd.read_csv('../case1Data.txt')
 
     return data
 
