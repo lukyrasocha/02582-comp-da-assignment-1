@@ -18,7 +18,6 @@ def preprocess(
     :param impute_strategy: str (mean, median)
     """
 
-    pd.set_option('future.no_silent_downcasting', True)
     data.replace(to_replace=r'^\s*NaN\s*$', value=np.nan, regex=True, inplace=True)
 
     # Cast numerical values to float
