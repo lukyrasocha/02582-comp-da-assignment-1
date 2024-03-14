@@ -9,13 +9,10 @@ from sklearn.impute import KNNImputer
 from util import load_data
 
 
-def preprocess(
-    data: pd.DataFrame,
-    impute_strategy: str = 'mean'):
+def preprocess(data: pd.DataFrame):
     """
     Preprocess the data
     :param data: pandas.DataFrame (original data format from load_data)
-    :param impute_strategy: str (mean, median)
     """
 
     data.replace(to_replace=r'^\s*NaN\s*$', value=np.nan, regex=True, inplace=True)
@@ -25,6 +22,8 @@ def preprocess(
 
     X = data.drop(['y', ' C_ 2'], axis=1)
     y = data['y']
+
+    # make sure y is a dataframe
 
     # Define numerical and categorical features
     numerical_features = X.iloc[:, :-4].columns.tolist()

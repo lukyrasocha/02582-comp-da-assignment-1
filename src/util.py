@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def load_data():
+def load_data() -> pd.DataFrame:
     data = pd.read_csv('../case1Data.txt')
 
     return data
