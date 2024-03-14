@@ -1,5 +1,5 @@
-from src.preprocess import preprocess
-from src.util import load_data
+from preprocess import preprocess
+from util import load_data
 
 from sklearn.linear_model import LinearRegression, Lasso, Ridge, ElasticNet
 from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor

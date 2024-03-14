@@ -5,7 +5,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
 
-from src.util import load_data
+from util import load_data
 
 
 def preprocess(
@@ -41,10 +41,6 @@ def preprocess(
         ('onehot', OneHotEncoder(handle_unknown='ignore'))])
 
     # Bundle preprocessing for numerical and categorical data
-    print("+++++++++++++++++++++++")
-    print(categorical_features)
-    print(numerical_features)
-    print("+++++++++++++++++++++++")
     preprocessor = ColumnTransformer(
         transformers=[
             ('num', numerical_transformer, numerical_features),
