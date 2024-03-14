@@ -54,7 +54,7 @@ def main():
                                            'scores': [],
                                             'r2': []})
 
-    models["RandomForest"] = []
+    #models["RandomForest"] = []
 
     # Elastic net
     #alpha_values = np.logspace(0, 3, 13)

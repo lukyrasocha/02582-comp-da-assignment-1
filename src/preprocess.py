@@ -4,6 +4,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
+from sklearn.impute import KNNImputer
 
 from util import load_data
 
@@ -31,7 +32,7 @@ def preprocess(
 
     # Define preprocessing for numerical features: imputation + standardization
     numerical_transformer = Pipeline(steps=[
-        ('imputer', SimpleImputer(strategy=impute_strategy)),
+        ('imputer', KNNImputer(n_neighbors=5)),
         ('scaler', StandardScaler())])
 
     # Define preprocessing for categorical features: imputation + one-hot encoding
