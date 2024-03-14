@@ -1,7 +1,7 @@
 from src.preprocess import preprocess
 from src.util import load_data
 
-from sklearn.linear_model import LinearRegression, Lasso, Ridge
+from sklearn.linear_model import LinearRegression, Lasso, Ridge, ElasticNet
 from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor
 from sklearn.model_selection import KFold
 from sklearn.pipeline import Pipeline
@@ -17,7 +17,7 @@ def main():
     X, y, preprocessor = preprocess(data)
 
     models = {}
-    models['LinearRegression'] = [{'parameters':{}, 'model': LinearRegression(), 'scores': []}]
+    models['LinearRegression'] = [{'parameters':{}, 'model': LinearRegression(), 'scores': [], 'r2': []}]
     models['Ridge'] = []
     models['Lasso'] = []
     models['ElasticNet'] = []
@@ -33,13 +33,15 @@ def main():
     for lambda_value in lambda_values:
         models['Ridge'].append({'parameters': {'regressor_alpha': lambda_value},
                                 'model': Ridge(alpha=lambda_value),
-                                'scores': []})
+                                'scores': [],
+                                'r2': []})
     # Lasso
     lambda_values = np.logspace(-1, 3, 5)
     for lambda_value in lambda_values:
         models['Lasso'].append({'parameters': {'regressor_alpha': lambda_value},
                                 'model': Lasso(alpha=lambda_value),
-                                'scores': []})
+                                'scores': [],
+                                'r2': []})
 
     # Random Forest
     n_estimators = [10, 50, 100, 200]
@@ -49,7 +51,21 @@ def main():
         for d in max_depth:
             models['RandomForest'].append({'parameters': {'n_estimators': n, 'max_depth': d},
                                            'model': RandomForestRegressor(n_estimators=n, max_depth=d),
-                                           'scores': []})
+                                           'scores': [],
+                                            'r2': []})
+
+    models["RandomForest"] = []
+
+    # Elastic net
+    #alpha_values = np.logspace(0, 3, 13)
+    alpha_values =[10] #np.arange(0, 1, 0.1)
+    l1_ratio_values = np.linspace(0, 1, 11)
+    for alpha in alpha_values:
+        for l1_ratio in l1_ratio_values:
+            models['ElasticNet'].append({'parameters': {'regressor_alpha': alpha, 'l1_ratio': l1_ratio},
+                                        'model': ElasticNet(alpha=alpha, l1_ratio=l1_ratio, max_iter=10000),
+                                        'scores': [],
+                                        'r2': []})
 
     K = 10
     kfold = KFold(n_splits=K, shuffle=True, random_state=42)
@@ -75,9 +91,11 @@ def main():
                 # Calculate RMSE for this fold and append to scores
                 score = np.sqrt(mean_squared_error(y_test, y_pred))
                 model["scores"].append(score)
+                model["r2"].append(pipeline.score(X_test, y_test))
 
             # Print the average RMSE across all folds
             print(f'Average RMSE for {method} with parameters: {model["parameters"]}: {np.mean(model["scores"])}')
+            print(f'Average R2 for {method} with parameters: {model["parameters"]}: {np.mean(model["r2"])}')
 
     # Select the best model for each method
     best_models = {}
@@ -100,6 +118,14 @@ def main():
            [np.mean(best_models[method]["scores"]) for method in best_models])
     ax.set_ylabel('RMSE')
     ax.set_title('RMSE for the best model of each method')
+    plt.show()
+
+    # Barchart of R2 for the best model of each method
+    fig, ax = plt.subplots()
+    ax.bar(best_models.keys(),
+              [np.mean(best_models[method]["r2"]) for method in best_models])
+    ax.set_ylabel('R2')
+    ax.set_title('R2 for the best model of each method')
     plt.show()
 
 

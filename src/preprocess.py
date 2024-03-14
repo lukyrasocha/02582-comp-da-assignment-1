@@ -23,12 +23,12 @@ def preprocess(
     # Cast numerical values to float
     data.iloc[:, :-5] = data.iloc[:, :-5].astype(float)
 
-    X = data.drop('y', axis=1)
+    X = data.drop(['y', ' C_ 2'], axis=1)
     y = data['y']
 
     # Define numerical and categorical features
-    numerical_features = X.select_dtypes(include=['int64', 'float64']).columns
-    categorical_features = X.select_dtypes(include=['object', 'bool']).columns
+    numerical_features = X.iloc[:, :-4].columns.tolist()
+    categorical_features = [" C_ 1", " C_ 3", " C_ 4", " C_ 5"]
 
     # Define preprocessing for numerical features: imputation + standardization
     numerical_transformer = Pipeline(steps=[
@@ -41,6 +41,10 @@ def preprocess(
         ('onehot', OneHotEncoder(handle_unknown='ignore'))])
 
     # Bundle preprocessing for numerical and categorical data
+    print("+++++++++++++++++++++++")
+    print(categorical_features)
+    print(numerical_features)
+    print("+++++++++++++++++++++++")
     preprocessor = ColumnTransformer(
         transformers=[
             ('num', numerical_transformer, numerical_features),
@@ -52,5 +56,9 @@ def preprocess(
 if __name__ == '__main__':
     data = load_data()
     X, y, preprocessor = preprocess(data)
-    print(X)
+    print(X.head())
+    print(list(X.columns))
     print(y)
+    # Try the preprocessor
+    X = preprocessor.fit_transform(X)
+    print(X.shape)
