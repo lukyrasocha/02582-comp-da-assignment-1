@@ -20,11 +20,11 @@ def preprocess(data: pd.DataFrame):
     # Cast numerical values to float
     data.iloc[:, :-5] = data.iloc[:, :-5].astype(float)
 
-    X = data.drop(['y', ' C_ 2'], axis=1)
+    X = data.drop(['y', ' C_ 2', ' C_ 1'], axis=1)
     y = data['y']
 
     # Replace the categorical missing values with a new category 'missing'
-    X[' C_ 1'] = X[' C_ 1'].fillna('missing')
+    #X[' C_ 1'] = X[' C_ 1'].fillna('missing')
     X[' C_ 3'] = X[' C_ 3'].fillna('missing')
     X[' C_ 4'] = X[' C_ 4'].fillna('missing')
     X[' C_ 5'] = X[' C_ 5'].fillna('missing')
@@ -33,7 +33,8 @@ def preprocess(data: pd.DataFrame):
 
     # Define numerical and categorical features
     numerical_features = X.iloc[:, :-4].columns.tolist()
-    categorical_features = [" C_ 1", " C_ 3", " C_ 4", " C_ 5"]
+    #categorical_features = [" C_ 1", " C_ 3", " C_ 4", " C_ 5"]
+    categorical_features = [" C_ 3", " C_ 4", " C_ 5"]
 
     # Define preprocessing for numerical features: imputation + standardization
     numerical_transformer = Pipeline(steps=[
