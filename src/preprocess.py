@@ -23,6 +23,12 @@ def preprocess(data: pd.DataFrame):
     X = data.drop(['y', ' C_ 2'], axis=1)
     y = data['y']
 
+    # Replace the categorical missing values with a new category 'missing'
+    X[' C_ 1'] = X[' C_ 1'].fillna('missing')
+    X[' C_ 3'] = X[' C_ 3'].fillna('missing')
+    X[' C_ 4'] = X[' C_ 4'].fillna('missing')
+    X[' C_ 5'] = X[' C_ 5'].fillna('missing')
+
     # make sure y is a dataframe
 
     # Define numerical and categorical features
@@ -36,7 +42,7 @@ def preprocess(data: pd.DataFrame):
 
     # Define preprocessing for categorical features: imputation + one-hot encoding
     categorical_transformer = Pipeline(steps=[
-        ('imputer', SimpleImputer(strategy='most_frequent')),
+        #('imputer', SimpleImputer(strategy='most_frequent')),
         ('onehot', OneHotEncoder(handle_unknown='ignore'))])
 
     # Bundle preprocessing for numerical and categorical data

@@ -82,7 +82,32 @@ def visualize_coefficients(results):
             plt.ylabel('Model')
             plt.savefig(f'../figures/{method}_coefficients.png')
 
+def visualize_c1():
+    data = load_data()
+
+    data.replace(to_replace=r'^\s*NaN\s*$', value=np.nan, regex=True, inplace=True)
+    sns.set_theme(style='darkgrid', palette='pastel', font='sans-serif', font_scale=1, color_codes=True, rc=None)
+
+    # Create a barplot so that categories are on the x-axis and counts are on the y-axis
+    plt.figure(figsize=(8, 8))
+    sns.countplot(data[' C_ 1'], color='black')
+    plt.title('Distribution of C_1')
+    plt.savefig('../figures/c1_histogram_nan.png')
+
+    # Impute missing values with most frequent
+
+
+    data[' C_ 1'] = data[' C_ 1'].fillna(data[' C_ 1'].mode()[0])
+
+    # Create a histogram of C_1
+    plt.figure(figsize=(8, 8))
+    sns.countplot(data[' C_ 1'], color='black')
+    plt.title('Distribution of C_1 after imputation')
+    plt.savefig('../figures/c1_histogram_imputed.png')
+
+
 if __name__ == '__main__':
     data = load_data()
     X, y, preprocessor = preprocess(data)
     visualize_correlation_matrix(X)
+    visualize_c1()
