@@ -68,69 +68,69 @@ Nested CV Average RMSE (Generalization error) for Lasso: 19.822233207851582
 Nested CV Average R2 for Lasso with best parameters: 0.7253441562096338
 ================================================================================
 Running nested cross-validation for ElasticNet
-Best model for outer loop 1 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 1.0}
-RMSE for outer loop 1 for ElasticNet: 22.264706134476338
-R2 for outer loop 1 for ElasticNet: 0.8729312358706685
-Best model for outer loop 2 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 1.0}
-RMSE for outer loop 2 for ElasticNet: 16.678102864973713
-R2 for outer loop 2 for ElasticNet: 0.883299171151628
-Best model for outer loop 3 for ElasticNet has parameters: {'regressor_alpha': 1.7782794100389228, 'l1_ratio': 1.0}
-RMSE for outer loop 3 for ElasticNet: 19.367825274874743
-R2 for outer loop 3 for ElasticNet: 0.8681470249092748
-Best model for outer loop 4 for ElasticNet has parameters: {'regressor_alpha': 1.7782794100389228, 'l1_ratio': 1.0}
-RMSE for outer loop 4 for ElasticNet: 19.001784211563887
-R2 for outer loop 4 for ElasticNet: 0.8690222923035549
-Best model for outer loop 5 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 1.0}
-RMSE for outer loop 5 for ElasticNet: 17.399967754133115
-R2 for outer loop 5 for ElasticNet: -0.03146934834933357
-Best model for outer loop 6 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 1.0}
-RMSE for outer loop 6 for ElasticNet: 13.482067182586542
-R2 for outer loop 6 for ElasticNet: 0.847834965414792
-Best model for outer loop 7 for ElasticNet has parameters: {'regressor_alpha': 1.7782794100389228, 'l1_ratio': 1.0}
-RMSE for outer loop 7 for ElasticNet: 22.536228271600212
-R2 for outer loop 7 for ElasticNet: 0.3817986403347915
-Best model for outer loop 8 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 1.0}
-RMSE for outer loop 8 for ElasticNet: 23.145110881496038
-R2 for outer loop 8 for ElasticNet: 0.7779389636142763
-Best model for outer loop 9 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 1.0}
-RMSE for outer loop 9 for ElasticNet: 29.53518025981453
-R2 for outer loop 9 for ElasticNet: 0.8655090711304475
-Best model for outer loop 10 for ElasticNet has parameters: {'regressor_alpha': 1.7782794100389228, 'l1_ratio': 1.0}
-RMSE for outer loop 10 for ElasticNet: 14.811359242996698
-R2 for outer loop 10 for ElasticNet: 0.9184295457162368
-Nested CV Average RMSE (Generalization error) for ElasticNet: 19.822233207851582
-Nested CV Average R2 for ElasticNet with best parameters: 0.7253441562096338
+Best model for outer loop 1 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 0.999}
+RMSE for outer loop 1 for ElasticNet: 22.333054015998197
+R2 for outer loop 1 for ElasticNet: 0.8721498906199582
+Best model for outer loop 2 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 0.999}
+RMSE for outer loop 2 for ElasticNet: 16.52479370587667
+R2 for outer loop 2 for ElasticNet: 0.885434794786179
+Best model for outer loop 3 for ElasticNet has parameters: {'regressor_alpha': 1.7782794100389228, 'l1_ratio': 0.999}
+RMSE for outer loop 3 for ElasticNet: 19.3884878520047
+R2 for outer loop 3 for ElasticNet: 0.8678655399717783
+Best model for outer loop 4 for ElasticNet has parameters: {'regressor_alpha': 1.7782794100389228, 'l1_ratio': 0.999}
+RMSE for outer loop 4 for ElasticNet: 18.95931012088017
+R2 for outer loop 4 for ElasticNet: 0.8696071785853012
+Best model for outer loop 5 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 0.999}
+RMSE for outer loop 5 for ElasticNet: 17.41222442800007
+R2 for outer loop 5 for ElasticNet: -0.03292301036552048
+Best model for outer loop 6 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 0.999}
+RMSE for outer loop 6 for ElasticNet: 13.528040432831025
+R2 for outer loop 6 for ElasticNet: 0.8467954440525484
+Best model for outer loop 7 for ElasticNet has parameters: {'regressor_alpha': 1.7782794100389228, 'l1_ratio': 0.999}
+RMSE for outer loop 7 for ElasticNet: 22.6352255077852
+R2 for outer loop 7 for ElasticNet: 0.37635543612371736
+Best model for outer loop 8 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 0.999}
+RMSE for outer loop 8 for ElasticNet: 23.14660114569234
+R2 for outer loop 8 for ElasticNet: 0.7779103666230984
+Best model for outer loop 9 for ElasticNet has parameters: {'regressor_alpha': 1.0, 'l1_ratio': 0.999}
+RMSE for outer loop 9 for ElasticNet: 29.644796606862712
+R2 for outer loop 9 for ElasticNet: 0.8645089240818382
+Best model for outer loop 10 for ElasticNet has parameters: {'regressor_alpha': 1.7782794100389228, 'l1_ratio': 0.999}
+RMSE for outer loop 10 for ElasticNet: 14.80364540777716
+R2 for outer loop 10 for ElasticNet: 0.9185144882501343
+Nested CV Average RMSE (Generalization error) for ElasticNet: 19.837617922370825
+Nested CV Average R2 for ElasticNet with best parameters: 0.7246219052729034
 ================================================================================
 Running nested cross-validation for RandomForest
-Best model for outer loop 1 for RandomForest has parameters: {'n_estimators': 100, 'max_depth': 200}
-RMSE for outer loop 1 for RandomForest: 44.964234618873505
-R2 for outer loop 1 for RandomForest: 0.4817500346271062
-Best model for outer loop 2 for RandomForest has parameters: {'n_estimators': 50, 'max_depth': 10}
-RMSE for outer loop 2 for RandomForest: 31.057338206903065
-R2 for outer loop 2 for RandomForest: 0.5953224544333988
-Best model for outer loop 3 for RandomForest has parameters: {'n_estimators': 200, 'max_depth': 20}
-RMSE for outer loop 3 for RandomForest: 31.282950303228343
-R2 for outer loop 3 for RandomForest: 0.6560117358339921
-Best model for outer loop 4 for RandomForest has parameters: {'n_estimators': 100, 'max_depth': 200}
-RMSE for outer loop 4 for RandomForest: 23.35118864843928
-R2 for outer loop 4 for RandomForest: 0.8021998546001128
-Best model for outer loop 5 for RandomForest has parameters: {'n_estimators': 100, 'max_depth': 200}
-RMSE for outer loop 5 for RandomForest: 35.73750090873158
-R2 for outer loop 5 for RandomForest: -3.351187505498298
-Best model for outer loop 6 for RandomForest has parameters: {'n_estimators': 200, 'max_depth': 5}
-RMSE for outer loop 6 for RandomForest: 27.70438422214585
-R2 for outer loop 6 for RandomForest: 0.35746187966903675
-Best model for outer loop 7 for RandomForest has parameters: {'n_estimators': 200, 'max_depth': 10}
-RMSE for outer loop 7 for RandomForest: 24.202158833203956
-R2 for outer loop 7 for RandomForest: 0.28702269901398747
-Best model for outer loop 8 for RandomForest has parameters: {'n_estimators': 50, 'max_depth': 20}
-RMSE for outer loop 8 for RandomForest: 38.577078747878105
-R2 for outer loop 8 for RandomForest: 0.383103216090696
-Best model for outer loop 9 for RandomForest has parameters: {'n_estimators': 200, 'max_depth': 5}
-RMSE for outer loop 9 for RandomForest: 57.700326617020785
-R2 for outer loop 9 for RandomForest: 0.48670115797324587
-Best model for outer loop 10 for RandomForest has parameters: {'n_estimators': 50, 'max_depth': 5}
-RMSE for outer loop 10 for RandomForest: 28.62403118936135
-R2 for outer loop 10 for RandomForest: 0.6953475728338269
-Nested CV Average RMSE (Generalization error) for RandomForest: 34.32011922957858
-Nested CV Average R2 for RandomForest with best parameters: 0.1393733099577105
+Best model for outer loop 1 for RandomForest has parameters: {'n_estimators': 500, 'max_depth': 10, 'min_samples_split': 2}
+RMSE for outer loop 1 for RandomForest: 51.7706386723048
+R2 for outer loop 1 for RandomForest: 0.3129759872956632
+Best model for outer loop 2 for RandomForest has parameters: {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}
+RMSE for outer loop 2 for RandomForest: 31.071038812410556
+R2 for outer loop 2 for RandomForest: 0.5949653375238723
+Best model for outer loop 3 for RandomForest has parameters: {'n_estimators': 200, 'max_depth': 10, 'min_samples_split': 4}
+RMSE for outer loop 3 for RandomForest: 35.12102092928789
+R2 for outer loop 3 for RandomForest: 0.5664267495775263
+Best model for outer loop 4 for RandomForest has parameters: {'n_estimators': 100, 'max_depth': 10, 'min_samples_split': 4}
+RMSE for outer loop 4 for RandomForest: 26.696897684376783
+R2 for outer loop 4 for RandomForest: 0.7414585287822066
+Best model for outer loop 5 for RandomForest has parameters: {'n_estimators': 100, 'max_depth': 10, 'min_samples_split': 5}
+RMSE for outer loop 5 for RandomForest: 27.538203599591295
+R2 for outer loop 5 for RandomForest: -1.5836319879729888
+Best model for outer loop 6 for RandomForest has parameters: {'n_estimators': 200, 'max_depth': None, 'min_samples_split': 2}
+RMSE for outer loop 6 for RandomForest: 29.897212197643075
+R2 for outer loop 6 for RandomForest: 0.2517214725126632
+Best model for outer loop 7 for RandomForest has parameters: {'n_estimators': 200, 'max_depth': None, 'min_samples_split': 6}
+RMSE for outer loop 7 for RandomForest: 23.64411665743855
+R2 for outer loop 7 for RandomForest: 0.3195226457903344
+Best model for outer loop 8 for RandomForest has parameters: {'n_estimators': 200, 'max_depth': None, 'min_samples_split': 2}
+RMSE for outer loop 8 for RandomForest: 44.32466780100933
+R2 for outer loop 8 for RandomForest: 0.18558678936377782
+Best model for outer loop 9 for RandomForest has parameters: {'n_estimators': 200, 'max_depth': 10, 'min_samples_split': 4}
+RMSE for outer loop 9 for RandomForest: 60.95382030548381
+R2 for outer loop 9 for RandomForest: 0.427183390641135
+Best model for outer loop 10 for RandomForest has parameters: {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 4}
+RMSE for outer loop 10 for RandomForest: 31.99853102226421
+R2 for outer loop 10 for RandomForest: 0.6192822437587576
+Nested CV Average RMSE (Generalization error) for RandomForest: 36.30161476818103
+Nested CV Average R2 for RandomForest with best parameters: 0.24354911572729473

@@ -39,17 +39,23 @@ def main():
                                 'r2': []})
 
     # Random Forest
-    n_estimators = [10, 50, 100, 200]
-    max_depth = [5, 10, 20, 50, 200]
+    n_estimators = [100, 200, 500]
+    max_depth = [None, 5, 10]
+    min_samples_split = [2, 4, 5, 6, 10]
+
     for n in n_estimators:
         for d in max_depth:
-            models['RandomForest'].append({'parameters': {'n_estimators': n, 'max_depth': d},
-                                           'model': RandomForestRegressor(n_estimators=n, max_depth=d),
-                                           'scores': [],
-                                            'r2': []})
+            for mss in min_samples_split:
+                models['RandomForest'].append({'parameters': {'n_estimators': n, 'max_depth': d, 'min_samples_split': mss},
+                                            'model': RandomForestRegressor(n_estimators=n,
+                                                                           max_depth=d,
+                                                                           max_features=int(np.sqrt(X.shape[1])),
+                                                                           min_samples_split=mss),
+                                            'scores': [],
+                                                'r2': []})
     # Elastic net
     alpha_values = np.logspace(0, 3, 13)
-    l1_ratio_values = np.linspace(0.001, 1, 15)
+    l1_ratio_values = np.linspace(0.001, 0.999, 15)
     for alpha in alpha_values:
         for l1_ratio in l1_ratio_values:
             models['ElasticNet'].append({'parameters': {'regressor_alpha': alpha, 'l1_ratio': l1_ratio},
