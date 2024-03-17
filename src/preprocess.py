@@ -35,8 +35,8 @@ def preprocess(data: pd.DataFrame):
 
     # Define preprocessing for numerical features: imputation + standardization
     numerical_transformer = Pipeline(steps=[
-        ('imputer', KNNImputer(n_neighbors=5)),
-        ('scaler', StandardScaler())])
+        ('scaler', StandardScaler()),
+        ('imputer', KNNImputer(n_neighbors=5))])
 
     # Define preprocessing for categorical features: imputation + one-hot encoding
     categorical_transformer = Pipeline(steps=[
