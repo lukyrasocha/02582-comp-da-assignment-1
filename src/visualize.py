@@ -9,7 +9,7 @@ import pandas as pd
 def visualize_correlation_matrix(X):
 
     # Create a correlation matrix
-    X = X.drop([' C_ 1', ' C_ 3', ' C_ 4', ' C_ 5'], axis=1)
+    X = X.drop(['C_1', 'C_3', 'C_4', 'C_5'], axis=1)
     corr = X.corr()
 
     # Draw the correlation matrix

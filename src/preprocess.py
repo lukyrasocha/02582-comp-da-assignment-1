@@ -20,18 +20,25 @@ def preprocess(data: pd.DataFrame):
     # Cast numerical values to float
     data.iloc[:, :-5] = data.iloc[:, :-5].astype(float)
 
-    X = data.drop(['y', ' C_ 2'], axis=1)
-    y = data['y']
+    # Remove all white spaces from all column names even when there are multiple spaces between words
+    data.columns = data.columns.str.replace(' ', '')
+
+    if 'y' in data.columns:
+        y = data['y']
+        X = data.drop(['y', 'C_2'], axis=1)
+    else:
+        y = None
+        X = data.drop(['C_2'], axis=1)
 
     # Replace the categorical missing values with a new category 'missing'
-    X[' C_ 1'] = X[' C_ 1'].fillna('missing')
-    X[' C_ 3'] = X[' C_ 3'].fillna('missing')
-    X[' C_ 4'] = X[' C_ 4'].fillna('missing')
-    X[' C_ 5'] = X[' C_ 5'].fillna('missing')
+    X['C_1'] = X['C_1'].fillna('missing')
+    X['C_3'] = X['C_3'].fillna('missing')
+    X['C_4'] = X['C_4'].fillna('missing')
+    X['C_5'] = X['C_5'].fillna('missing')
 
     # Define numerical and categorical features
     numerical_features = X.iloc[:, :-4].columns.tolist()
-    categorical_features = [" C_ 1", " C_ 3", " C_ 4", " C_ 5"]
+    categorical_features = ["C_1", "C_3", "C_4", "C_5"]
 
     # Define preprocessing for numerical features: imputation + standardization
     numerical_transformer = Pipeline(steps=[
