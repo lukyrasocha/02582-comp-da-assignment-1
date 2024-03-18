@@ -7,7 +7,7 @@ from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor
 from sklearn.model_selection import KFold
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_squared_error, r2_score
-
+from sklearn.linear_model import  Lasso
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
